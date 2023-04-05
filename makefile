@@ -4,8 +4,19 @@ build:
 run:
 	@echo "Running app"
 
+run_dev:
+	g++ ./src/main.cpp -o ./temp/run && chmod +x ./temp/run && ./temp/run
+
+watch:
+	watchexec --restart -w src '$(MAKE) clean && $(MAKE) run_dev'
+
 dev:
-	@echo "Running app with development"
+	@echo "\nRunning app with development\n"
+	$(MAKE) watch
+
+fresh:
+	$(MAKE) clean
+	$(MAKE) dir
 
 dir:
 	mkdir -p ./temp
